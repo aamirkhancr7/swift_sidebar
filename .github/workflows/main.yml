@@ -37,6 +37,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Test
         run: |
-          xcodebuild clean test -project sidebar.xcodeproj -scheme sidebarTests -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+          xcodebuild clean test -project sidebar.xcodeproj -scheme sidebar -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
         env:
           destination: ${{ matrix.destination }}
