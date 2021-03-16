@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBAction func onMoreTapped() {
-        print("Toggle SideMenu")
+        print("Toggle SideMfenu")
         NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
     }
 }
