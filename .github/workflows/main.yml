@@ -1,0 +1,36 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI Test
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: macos-latest
+    
+    strategy:
+      matrix:
+        destination: ['platform=iOS Simulator,OS=14.4,name=iPhone 11 Pro Max']
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@main
+
+      # Runs a single command using the runners shell
+      - name: Build
+        run: |
+          xcodebuild clean build -project sidebar.xcodeproj -scheme sidebar -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+        env:
+          destination: ${{ matrix.destination }}
